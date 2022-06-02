@@ -27,18 +27,18 @@ bot.onText(/.*Obrigad[o|a].*/i, (msg, _) => {
     bot.sendMessage(msg.chat.id, "Não, não, graças à você");
 })
 
-bot.onText(/.*Kiitos*/i, (msg, _) => {
+bot.onText(/.*Kiitos.*/i, (msg, _) => {
     bot.sendMessage(msg.chat_id, "Yhdeksäs, kiitos sinulle");
 })
 
-bot.onText(/.*Spasib[a|o]*/i, (msg, _) => {
+bot.onText(/.*Spasib[a|o].*/i, (msg, _) => {
     bot.sendMessage(msg.chat_id, "девятый, спасибо тебе");
 })
 
-bot.onText(/.*Aitah*/i, (msg, _) => {
+bot.onText(/.*Aitah.*/i, (msg, _) => {
     bot.sendMessage(msg.chat_id, "Uheksas, tänu sulle");
 })
 
-bot.onText(/.*SIUM*/i, (msg, _) => {
+bot.onText(/.*SIUM.*/i, (msg, _) => {
     bot.sendAnimation(msg.chat.id, "https://tenor.com/view/eleven-elevensports-forthefans-goal-happy-gif-19850600");
 })
