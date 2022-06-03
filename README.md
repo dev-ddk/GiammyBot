@@ -16,5 +16,5 @@ Feel free to modify `index.js`, or to add other files. If you want to test this 
 
 ```
 $ npm install
-$ npm index.js
+$ npm run start # or `npm run dev` if you want hot reloading
 ```
