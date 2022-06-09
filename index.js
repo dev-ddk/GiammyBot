@@ -17,22 +17,25 @@ regexMap.set(/.*Aitah.*/i, "Uheksas, tänu sulle");
 
 const isThursday = () => new Date().getDay() === 4;
 
+const handleIsThursday = () => {
+  if (isThursday()) {
+    bot.sendMessage(msg.chat.id, "Giammi è chiuso il giovedì. 😢");
+    return true;
+  }
+
+  return false;
+};
+
 regexMap.forEach((value, key) => {
   bot.onText(key, (msg, _) => {
-    if (isThursday()) {
-      bot.sendMessage(msg.chat.id, "Giammi è chiuso il giovedì. 😢");
-      return;
-    }
+    if (handleIsThursday) return;
 
     bot.sendMessage(msg.chat.id, value);
   });
 });
 
 bot.onText(/.*SIUM.*/i, (msg, _) => {
-  if (isThursday()) {
-    bot.sendMessage(msg.chat.id, "Giammi è chiuso il giovedì. 😢");
-    return;
-  }
+  if (handleIsThursday) return;
 
   sendAnimation(bot, {
     chatId: msg.chat.id,
