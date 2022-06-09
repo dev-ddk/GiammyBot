@@ -15,13 +15,28 @@ regexMap.set(/.*Kiitos.*/i, "Yhdeksäs, kiitos sinulle");
 regexMap.set(/.*Spasib[a|o].*/i, "девятый, спасибо тебе");
 regexMap.set(/.*Aitah.*/i, "Uheksas, tänu sulle");
 
+const isThursday = () => new Date().getDay() === 4;
+
 regexMap.forEach((value, key) => {
-  bot.onText(key, (msg, _) => bot.sendMessage(msg.chat.id, value));
+  bot.onText(key, (msg, _) => {
+    if (isThursday()) {
+      bot.sendMessage(msg.chat.id, "Giammi è chiuso il giovedì. 😢");
+      return;
+    }
+
+    bot.sendMessage(msg.chat.id, value);
+  });
 });
 
 bot.onText(/.*SIUM.*/i, (msg, _) => {
-  bot.sendAnimation(
-    msg.chat.id,
-    "https://tenor.com/view/eleven-elevensports-forthefans-goal-happy-gif-19850600"
-  );
+  if (isThursday()) {
+    bot.sendMessage(msg.chat.id, "Giammi è chiuso il giovedì. 😢");
+    return;
+  }
+
+  sendAnimation(bot, {
+    chatId: msg.chat.id,
+    value:
+      "https://tenor.com/view/eleven-elevensports-forthefans-goal-happy-gif-19850600",
+  });
 });
