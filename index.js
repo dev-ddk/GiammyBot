@@ -4,40 +4,19 @@ require("dotenv").config();
 const token = process.env.BOT_TOKEN;
 const bot = new TelegramBot(token, { polling: true });
 
-bot.onText(/.*Grazie.*/i, (msg, _) => {
-  bot.sendMessage(msg.chat.id, "Nono, grazie a ted");
-});
+const regexMap = new Map();
+regexMap.set(/.*Grazie.*/i, "Nono, grazie a te");
+regexMap.set(/.*Thank you.*/i, "Nono, thanks to you");
+regexMap.set(/.*Gracias.*/i, "Nono, gracias a ti");
+regexMap.set(/.*Dankesch[o|ö]n.*/i, "Nein, nein, dank an Sie");
+regexMap.set(/.*Merci.*/i, "Non, non, merci à vous.");
+regexMap.set(/.*Obrigad[o|a].*/i, "Não, não, graças à você");
+regexMap.set(/.*Kiitos.*/i, "Yhdeksäs, kiitos sinulle");
+regexMap.set(/.*Spasib[a|o].*/i, "девятый, спасибо тебе");
+regexMap.set(/.*Aitah.*/i, "Uheksas, tänu sulle");
 
-bot.onText(/.*Thank you.*/i, (msg, _) => {
-  bot.sendMessage(msg.chat.id, "Nono, thanks to you");
-});
-
-bot.onText(/.*Gracias.*/i, (msg, _) => {
-  bot.sendMessage(msg.chat.id, "Nono, gracias a ti");
-});
-
-bot.onText(/.*Dankesch[o|ö]n.*/i, (msg, _) => {
-  bot.sendMessage(msg.chat.id, "Nein, nein, dank an Sie");
-});
-
-bot.onText(/.*Merci.*/i, (msg, _) => {
-  bot.sendMessage(msg.chat.id, "Non, non, merci à vous.");
-});
-
-bot.onText(/.*Obrigad[o|a].*/i, (msg, _) => {
-  bot.sendMessage(msg.chat.id, "Não, não, graças à você");
-});
-
-bot.onText(/.*Kiitos.*/i, (msg, _) => {
-  bot.sendMessage(msg.chat.id, "Yhdeksäs, kiitos sinulle");
-});
-
-bot.onText(/.*Spasib[a|o].*/i, (msg, _) => {
-  bot.sendMessage(msg.chat.id, "девятый, спасибо тебе");
-});
-
-bot.onText(/.*Aitah.*/i, (msg, _) => {
-  bot.sendMessage(msg.chat.id, "Uheksas, tänu sulle");
+regexMap.forEach((value, key) => {
+  bot.onText(key, (msg, _) => bot.sendMessage(msg.chat.id, value));
 });
 
 bot.onText(/.*SIUM.*/i, (msg, _) => {
