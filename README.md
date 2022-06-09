@@ -7,7 +7,7 @@ This bot automatizes Giammy. That's it. That's the thing.
 Set the `BOT_TOKEN` environment variable in a `.env` file. Then, run:
 
 ```
-$ docker-compose up -d
+$ docker-compose up -d (with --build to reload code changes)
 ```
 
 ## Development
