@@ -17,9 +17,10 @@ regexMap.set(/.*Aitah.*/i, "Uheksas, tänu sulle");
 
 const isThursday = () => new Date().getDay() === 4;
 
-const handleIsThursday = () => {
+const handleIsThursday = (msg) => {
   if (isThursday()) {
     bot.sendMessage(msg.chat.id, "Giammi è chiuso il giovedì. 😢");
+
     return true;
   }
 
@@ -28,18 +29,39 @@ const handleIsThursday = () => {
 
 regexMap.forEach((value, key) => {
   bot.onText(key, (msg, _) => {
-    if (handleIsThursday) return;
+    if (handleIsThursday(msg)) return;
 
-    bot.sendMessage(msg.chat.id, value);
+    bot.sendMessage(msg.chat.id, value, {
+      reply_to_message_id: msg.message_id,
+    });
   });
 });
 
 bot.onText(/.*SIUM.*/i, (msg, _) => {
-  if (handleIsThursday) return;
+  if (handleIsThursday(msg)) return;
 
-  sendAnimation(bot, {
-    chatId: msg.chat.id,
-    value:
-      "https://tenor.com/view/eleven-elevensports-forthefans-goal-happy-gif-19850600",
+  const image =
+    "https://tenor.com/view/eleven-elevensports-forthefans-goal-happy-gif-19850600";
+
+  bot.sendAnimation(msg.chat.id, image, {
+    reply_to_message_id: msg.message_id,
   });
+});
+
+bot.onText(/.*Barusso.*/i, (msg, _) => {
+  if (handleIsThursday(msg)) return;
+
+  const image =
+    "https://img.ilgcdn.com/sites/default/files/styles/social/public/foto/2022/02/15/1644933321-usare-questo.jpg?_=1644933321";
+
+  bot.sendPhoto(msg.chat.id, image, { reply_to_message_id: msg.message_id });
+});
+
+bot.onText(/.*MUIS*/i, (msg, _) => {
+  if (handleIsThursday(msg)) return;
+
+  const image =
+    "https://media.gqitalia.it/photos/5c0667d1263bb2e4e4285e38/3:2/w_1600%2Cc_limit/photo0.jpg";
+
+  bot.sendPhoto(msg.chat.id, image, { reply_to_message_id: msg.message_id });
 });
