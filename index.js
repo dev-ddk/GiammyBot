@@ -19,7 +19,9 @@ const isThursday = () => new Date().getDay() === 4;
 
 const handleIsThursday = (msg) => {
   if (isThursday()) {
-    bot.sendMessage(msg.chat.id, "Giammi è chiuso il giovedì. 😢");
+    bot.sendMessage(msg.chat.id, "Giammi è chiuso il giovedì. 😢", {
+      reply_to_message_id: msg.message_id,
+    });
 
     return true;
   }
