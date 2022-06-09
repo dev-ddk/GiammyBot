@@ -1,5 +1,10 @@
 {
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
   "dependencies": {
+    "dotenv": "^16.0.1",
     "node-telegram-bot-api": "^0.57.0"
   }
 }
